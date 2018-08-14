@@ -2,6 +2,7 @@ var path = require('path');
 
 module.exports = {
 
+    mode: 'none',
     entry: path.resolve(__dirname, 'src') + '/app/index.js',
     output: {
         path: path.resolve(__dirname, 'dist') + '/app',
@@ -9,7 +10,7 @@ module.exports = {
         publicPath: '/app/'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 include: path.resolve(__dirname, 'src'),
