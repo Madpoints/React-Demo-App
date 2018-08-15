@@ -4,20 +4,24 @@ var ReactDOM = require('react-dom')
 
 // component
 var TodoComponent = createReactClass({
+  getInitialState: function() {
+    return {
+      todos: ['code more', 'and more', 'and some more']
+    }
+  },
   render: function() {
     return(
-      <div>
-        <h1>Hello {this.props.world}</h1>
-        <hr></hr>
-        <p><strong>Message: </strong>{this.props.message.content}</p>
-        <p><strong>Fortune: </strong>{this.props.message.fortune}</p>
-        <p><strong>From: </strong>{this.props.message.author}</p>
+      <div id="todo-list">
+        <p>Need to do:</p>
+        <ul>
+          <li>{this.state.todos[0]}</li>
+          <li>{this.state.todos[1]}</li>
+          <li>{this.state.todos[2]}</li>
+        </ul>
       </div>
     )
-  }
+  } // render
 })
 
-var myMessage = {content: 'React is neat', fortune: 'Looking good', author: 'Me'}
-
 // insert component into html
-ReactDOM.render(<TodoComponent world="World" message={myMessage}/>, document.getElementById('todo-wrapper'))
+ReactDOM.render(<TodoComponent/>, document.getElementById('todo-wrapper'))
