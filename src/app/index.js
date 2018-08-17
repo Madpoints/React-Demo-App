@@ -6,12 +6,19 @@ var ReactDOM = require('react-dom')
 var TodoComponent = createReactClass({
   getInitialState: function() {
     return {
-      todos: ['code more', 'and more', 'and some more'],
+      todos: ['code more', 'and more', 'and some more', 'vidya games'],
       month: 'August'
     }
   },
   render: function() {
-    // bind this funxtion to 'this' component
+    var todos = this.state.todos
+    // map todos into a array of list items
+    todos = todos.map(function(item, index) {
+      return (
+        <li>{item}</li>
+      )
+    })
+    // bind this function to 'this' component
     var changeMonth = setTimeout(function() {
       this.setState({
         month: "September"
@@ -21,9 +28,7 @@ var TodoComponent = createReactClass({
       <div id="todo-list">
         <p>Need to do for {this.state.month}:</p>
         <ul>
-          <li>{this.state.todos[0]}</li>
-          <li>{this.state.todos[1]}</li>
-          <li>{this.state.todos[2]}</li>
+          {todos}
         </ul>
       </div>
     )
