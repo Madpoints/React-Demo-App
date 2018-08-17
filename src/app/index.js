@@ -12,10 +12,10 @@ var TodoComponent = createReactClass({
   },
   render: function() {
     var todos = this.state.todos
-    // map todos into a array of list items
+    // map todos into a new nested component
     todos = todos.map(function(item, index) {
       return (
-        <li>{item}</li>
+        <TodoItem item={item} key={index}/>
       )
     })
     // bind this function to 'this' component
@@ -33,6 +33,19 @@ var TodoComponent = createReactClass({
       </div>
     )
   } // render
+})
+
+// component
+var TodoItem = createReactClass({
+  render: function(){
+    return(
+      <li>
+        <div className="todo-item">
+          <span className="item-name">{this.props.item}</span>
+        </div>
+      </li>
+    )
+  }
 })
 
 // insert component into html
