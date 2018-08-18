@@ -1,6 +1,10 @@
 var React = require('react')
 var createReactClass = require('create-react-class')
 var ReactDOM = require('react-dom')
+require('./css/index.css')
+
+// Module requires
+var TodoItem = require('./todoItem')
 
 // component
 var TodoComponent = createReactClass({
@@ -42,29 +46,7 @@ var TodoComponent = createReactClass({
     this.setState({
       todos: updatedTodos
     })
-  } // filters items out of array updates parent component state
-
-})
-
-// component
-var TodoItem = createReactClass({
-  
-  render: function(){
-    return(
-      <li>
-        <div className="todo-item">
-          <span className="item-name">{this.props.item}</span>
-          <span className="item-delete" onClick={this.deleteItem}> x </span>
-        </div>
-      </li>
-    )
-  },
-
-  // Custom functions
-  deleteItem: function() {
-    this.props.onDelete(this.props.item)
-  }
-
+  } // filters items out of array and updates parent component state
 })
 
 // insert component into html
