@@ -4,21 +4,21 @@ var ReactDOM = require('react-dom')
 
 // component
 var TodoComponent = createReactClass({
+
   getInitialState: function() {
     return {
       todos: ['code more', 'and more', 'and some more', 'vidya games'],
       month: 'August'
     }
   },
+
   render: function() {
     var todos = this.state.todos
-    // map todos into a new nested component
     todos = todos.map(function(item, index) {
       return (
-        <TodoItem item={item} key={index}/>
+        <TodoItem item={item} key={index} onDelete={this.onDelete}/>
       )
-    })
-    // bind this function to 'this' component
+    }.bind(this)) // map todos into a new nested component and bind this function to 'this' component
     var changeMonth = setTimeout(function() {
       this.setState({
         month: "September"
@@ -32,20 +32,39 @@ var TodoComponent = createReactClass({
         </ul>
       </div>
     )
-  } // render
+  }, // render
+
+  // Custom functions
+  onDelete: function(item) {
+    var updatedTodos = this.state.todos.filter(function(val, index) {
+      return item !== val
+    })
+    this.setState({
+      todos: updatedTodos
+    })
+  } // filters items out of array updates parent component state
+
 })
 
 // component
 var TodoItem = createReactClass({
+  
   render: function(){
     return(
       <li>
         <div className="todo-item">
           <span className="item-name">{this.props.item}</span>
+          <span className="item-delete" onClick={this.deleteItem}> x </span>
         </div>
       </li>
     )
+  },
+
+  // Custom functions
+  deleteItem: function() {
+    this.props.onDelete(this.props.item)
   }
+
 })
 
 // insert component into html
