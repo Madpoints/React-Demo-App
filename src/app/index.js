@@ -5,6 +5,7 @@ require('./css/index.css')
 
 // Module requires
 var TodoItem = require('./todoItem')
+var AddItem = require('./addItem')
 
 // component
 var TodoComponent = createReactClass({
@@ -34,6 +35,7 @@ var TodoComponent = createReactClass({
         <ul>
           {todos}
         </ul>
+        <AddItem onAdd={this.onAdd}/>
       </div>
     )
   }, // render
@@ -46,7 +48,15 @@ var TodoComponent = createReactClass({
     this.setState({
       todos: updatedTodos
     })
-  } // filters items out of array and updates parent component state
+  }, // filters items out of array and updates parent component state
+
+  onAdd: function(item) {
+    var updatedTodos = this.state.todos
+    updatedTodos.push(item)
+    this.setState({
+      todos: updatedTodos
+    })
+  } // add new item to array
 })
 
 // insert component into html
